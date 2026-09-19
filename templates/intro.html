@@ -1,0 +1,363 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verbo — Speak with confidence. Write with clarity.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+ --blue:#2f6bff;--blue-deep:#1d4ed8;--navy:#132244;--ink:#1c2b4a;--muted:#647089;
+ --sky:#eef4ff;--sky-2:#e4edff;--line:#e2e8f5;--gold:#f6a723;--green:#22c55e;--white:#fff;
+ --head:"Plus Jakarta Sans",system-ui,sans-serif;--body:"Inter",system-ui,sans-serif;
+ --shadow:0 20px 50px rgba(30,55,120,.10);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--body);color:var(--ink);background:#fff;line-height:1.6}
+h1,h2,h3,h4,.brand{font-family:var(--head)}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 26px}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--head);font-weight:700;font-size:.95rem;
+ padding:13px 24px;border-radius:12px;cursor:pointer;border:1px solid transparent;transition:.18s}
+.btn-primary{background:var(--blue);color:#fff}.btn-primary:hover{background:var(--blue-deep)}
+.btn-ghost{background:#fff;border-color:var(--line);color:var(--navy)}.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+.arw{width:16px;height:16px}
+
+/* logo */
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.45rem;color:var(--navy)}
+.brand svg{width:38px;height:34px;flex:none}
+.brand-img{height:48px;width:auto;mix-blend-mode:multiply}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+.nav-links{display:flex;gap:34px}
+.nav-links a{font-family:var(--head);font-weight:600;font-size:.95rem;color:#425069;padding:6px 0;position:relative}
+.nav-links a.active{color:var(--blue)}
+.nav-links a.active::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--blue);border-radius:2px}
+.nav-links a:hover{color:var(--blue)}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-right .signin{font-family:var(--head);font-weight:600;font-size:.95rem;color:var(--navy)}
+
+/* hero */
+.hero{position:relative;background:linear-gradient(180deg,var(--sky) 0,#fff 100%);overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:40px;align-items:center;padding:56px 0 66px}
+.tagpill{display:inline-flex;gap:10px;align-items:center;background:#fff;border:1px solid var(--line);
+ border-radius:999px;padding:7px 16px;font-family:var(--head);font-weight:600;font-size:.82rem;color:var(--navy);box-shadow:0 4px 14px rgba(30,55,120,.05)}
+.tagpill .d{width:5px;height:5px;border-radius:50%;background:var(--blue)}
+.hero h1{font-size:3.7rem;line-height:1.05;letter-spacing:-.02em;font-weight:800;color:var(--navy);margin:22px 0 20px}
+.hero h1 .b{color:var(--blue);display:block}
+.hero p{color:var(--muted);font-size:1.12rem;max-width:42ch;margin:0 0 30px}
+.hero .cta{display:flex;gap:14px;flex-wrap:wrap}
+.trust{display:flex;gap:26px;flex-wrap:wrap;margin-top:30px;color:var(--muted);font-size:.9rem;font-weight:500}
+.trust span{display:inline-flex;gap:8px;align-items:center}.trust svg{width:17px;height:17px;color:var(--blue)}
+
+/* blobs */
+.blob{position:absolute;border-radius:50%;filter:blur(2px);opacity:.85;z-index:0}
+.blob.b1{width:90px;height:60px;background:#bcd3ff;top:70px;right:44%;border-radius:60% 40% 50% 50%}
+.blob.b2{width:26px;height:26px;background:var(--gold);top:90px;right:2%;border-radius:50% 50% 50% 20%}
+.blob.b3{width:20px;height:44px;background:#ffd48a;bottom:120px;left:40%;border-radius:50%}
+
+/* laptop */
+.device{position:relative;z-index:2}
+.laptop{background:#0f1b34;border-radius:16px 16px 0 0;padding:10px 10px 0;box-shadow:var(--shadow);border:1px solid #0c1730}
+.screen{background:#f4f7fe;border-radius:9px;overflow:hidden;height:330px;display:flex;flex-direction:column}
+.lbase{height:16px;background:linear-gradient(#c4ccdb,#aab4c8);border-radius:0 0 14px 14px;position:relative;box-shadow:var(--shadow)}
+.lbase::after{content:"";position:absolute;left:50%;top:0;transform:translateX(-50%);width:80px;height:6px;background:#8f9bb3;border-radius:0 0 8px 8px}
+/* mini app */
+.app-top{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:#fff;border-bottom:1px solid #eef1f8}
+.app-brand{display:flex;align-items:center;gap:6px;font-family:var(--head);font-weight:800;font-size:.8rem;color:var(--navy)}
+.app-brand svg{width:16px;height:15px}
+.app-user{display:flex;align-items:center;gap:6px;font-size:.66rem;color:var(--muted)}
+.av{width:16px;height:16px;border-radius:50%;background:var(--blue);color:#fff;font-size:.6rem;display:grid;place-items:center;font-weight:700}
+.app-body{display:flex;flex:1;min-height:0}
+.app-side{width:88px;background:#fff;border-right:1px solid #eef1f8;padding:8px 6px;display:flex;flex-direction:column;gap:2px}
+.app-side a{font-size:.62rem;color:var(--muted);padding:5px 7px;border-radius:6px;font-weight:600}
+.app-side a.on{background:var(--sky);color:var(--blue)}
+.app-main{flex:1;padding:10px;min-width:0}
+.app-h{font-family:var(--head);font-weight:800;font-size:.74rem;color:var(--navy)}
+.app-sub{font-size:.58rem;color:var(--muted);margin-bottom:8px}
+.mini-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mcard{background:#fff;border:1px solid #eef1f8;border-radius:8px;padding:8px}
+.mcard .t{font-size:.6rem;font-weight:700;color:var(--navy)}
+.mcard .s{font-size:.5rem;color:var(--muted);margin-bottom:6px}
+.mic{width:34px;height:34px;border-radius:50%;background:var(--blue);margin:6px auto;display:grid;place-items:center;box-shadow:0 6px 14px rgba(47,107,255,.4)}
+.mic svg{width:15px;height:15px;color:#fff}
+.tapc{text-align:center;font-size:.48rem;color:var(--muted)}
+.wf{font-size:.5rem;color:#495066;line-height:1.5}
+.wf .hl{background:#d8f3e0;border-radius:2px;padding:0 2px}
+.needs{display:inline-flex;gap:3px;align-items:center;color:#e0674f;font-size:.5rem;font-weight:600;margin-top:5px}
+.sugg{color:var(--blue);font-size:.5rem;font-weight:600;margin-top:5px;text-align:right}
+.prog{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #eef1f8;border-radius:8px;padding:7px 10px;margin-top:8px}
+.ring{--v:78;width:26px;height:26px;border-radius:50%;background:conic-gradient(var(--green) calc(var(--v)*1%),#e8edf6 0);display:grid;place-items:center}
+.ring.blue{background:conic-gradient(var(--blue) calc(var(--v)*1%),#e8edf6 0)}
+.ring i{width:18px;height:18px;border-radius:50%;background:#fff;font-style:normal;font-size:.45rem;display:grid;place-items:center;font-weight:700;color:var(--navy)}
+.pl{font-size:.52rem;font-weight:700;color:var(--navy)}.pl small{display:block;font-weight:500;color:var(--muted);font-size:.46rem}
+
+/* floating badges */
+.fb{position:absolute;background:#fff;border-radius:12px;box-shadow:0 14px 30px rgba(30,55,120,.16);padding:9px 13px;
+ font-family:var(--head);font-weight:700;font-size:.76rem;color:var(--navy);display:flex;gap:9px;align-items:center;z-index:5}
+.fb small{display:block;font-weight:500;color:var(--muted);font-size:.66rem}
+.fb .ic{width:26px;height:26px;border-radius:8px;display:grid;place-items:center}
+.fb-1{top:6px;left:-24px}.fb-1 .ic{background:#e6ecff;color:var(--blue)}
+.fb-2{top:120px;right:-30px}.fb-2 .ic{background:#fff2d6;color:var(--gold)}
+.fb-3{bottom:36px;right:-20px}.fb-3 .ic{background:#e0f6e8;color:var(--green)}
+.fb svg{width:15px;height:15px}
+
+/* sections */
+.sec{padding:78px 0}
+.eyebrow{text-align:center;color:var(--blue);font-family:var(--head);font-weight:700;font-size:.8rem;letter-spacing:.12em}
+.sec h2{text-align:center;font-size:2.4rem;font-weight:800;color:var(--navy);margin:12px 0 10px;letter-spacing:-.01em}
+.sec .lead{text-align:center;color:var(--muted);max-width:56ch;margin:0 auto 46px}
+
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.fcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 22px;transition:.18s}
+.fcard:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:transparent}
+.fcard .fi{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px}
+.fcard .fi svg{width:24px;height:24px}
+.fi.blue{background:#e7efff;color:var(--blue)}.fi.gold{background:#fff2d9;color:var(--gold)}
+.fcard h3{font-size:1.16rem;margin:0 0 10px;color:var(--navy);font-weight:700}
+.fcard p{color:var(--muted);font-size:.94rem;margin:0}
+
+/* progress section */
+.progress-sec{background:var(--sky)}
+.pgrid{display:grid;grid-template-columns:.85fr 1.15fr;gap:44px;align-items:center}
+.pgrid .eyebrow,.pgrid h2{text-align:left}
+.pgrid h2{font-size:2.3rem;margin:12px 0 16px}
+.pgrid p{color:var(--muted);margin:0 0 26px}
+.dash{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow)}
+.score-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.scard{border:1px solid var(--line);border-radius:12px;padding:14px}
+.scard .sh{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:.8rem;font-weight:600}
+.scard .sh .si{width:30px;height:30px;border-radius:9px;display:grid;place-items:center}
+.si.blue{background:#e7efff;color:var(--blue)}
+.scard .num{font-family:var(--head);font-weight:800;font-size:1.7rem;color:var(--navy);margin:6px 0 8px}
+.scard .num small{font-size:.8rem;color:var(--muted);font-weight:600}
+.bar{height:7px;border-radius:5px;background:#eaeff8;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:5px}
+.low{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.panel{border:1px solid var(--line);border-radius:12px;padding:14px}
+.panel .ph{font-family:var(--head);font-weight:700;font-size:.86rem;color:var(--navy);margin-bottom:12px}
+.chart{display:flex;align-items:flex-end;gap:8px;height:88px}
+.chart .col{flex:1;background:var(--blue);border-radius:4px 4px 0 0;opacity:.9}
+.chart .lbls{display:flex}
+.wk{display:flex;justify-content:space-between;font-size:.56rem;color:var(--muted);margin-top:6px}
+.fb-list{display:flex;flex-direction:column;gap:12px}
+.fb-item{display:flex;gap:9px}
+.fb-dot{width:9px;height:9px;border-radius:50%;margin-top:4px;flex:none}
+.fb-item b{font-size:.78rem;color:var(--navy)}.fb-item p{font-size:.68rem;color:var(--muted);margin:1px 0 0}
+
+/* steps */
+.steps{display:flex;align-items:flex-start;justify-content:center;gap:10px;flex-wrap:wrap}
+.step{flex:1;min-width:180px;text-align:center;position:relative;padding:0 14px}
+.step .sn{width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;font-family:var(--head);font-weight:800;font-size:.85rem;display:grid;place-items:center;margin:0 auto 6px}
+.step .sic{width:56px;height:56px;border-radius:16px;background:#e7efff;color:var(--blue);display:grid;place-items:center;margin:0 auto 14px}
+.step .sic svg{width:26px;height:26px}
+.step h4{font-size:1.1rem;margin:0 0 8px;color:var(--navy);font-weight:700}
+.step p{color:var(--muted);font-size:.9rem;margin:0}
+.step-arrow{display:grid;place-items:center;color:#b9c6e4;padding-top:40px}
+.step-arrow svg{width:36px;height:20px}
+
+/* CTA */
+.cta-band{position:relative;overflow:hidden;background:linear-gradient(110deg,#e9f0ff,#dbe8ff);border-radius:22px;
+ display:flex;align-items:center;gap:30px;padding:34px 40px;margin:20px 0 0}
+.cta-band .brand{font-size:1.4rem}
+.cta-band .ct{flex:1}
+.cta-band h3{font-size:1.5rem;color:var(--navy);margin:0 0 4px;font-weight:800}
+.cta-band p{color:var(--muted);margin:0;font-size:.95rem}
+.cta-band .blob{position:absolute;z-index:0}
+.cta-band .cb1{width:60px;height:60px;background:var(--gold);opacity:.35;left:-14px;bottom:-14px;border-radius:50% 50% 50% 20%}
+.cta-band .cb2{width:70px;height:70px;background:var(--blue);opacity:.2;right:-16px;top:-16px;border-radius:50%}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:34px 0 30px;margin-top:70px}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.foot .brand{font-size:1.25rem}
+.foot .tag{color:var(--muted);font-size:.9rem;margin-left:6px}
+.foot-links{display:flex;gap:26px}.foot-links a{color:var(--muted);font-family:var(--head);font-weight:600;font-size:.9rem}.foot-links a:hover{color:var(--blue)}
+.foot-social{display:flex;gap:12px}.foot-social a{width:32px;height:32px;border-radius:9px;background:var(--sky);display:grid;place-items:center;color:var(--navy)}
+.foot-bot{display:flex;justify-content:space-between;color:var(--muted);font-size:.82rem;margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+.foot-bot .fl{display:flex;gap:20px}
+
+@media(max-width:900px){
+ .hero-grid,.pgrid{grid-template-columns:1fr}.hero h1{font-size:2.7rem}
+ .features{grid-template-columns:1fr 1fr}.nav-links{display:none}
+ .steps{flex-direction:column}.step-arrow{transform:rotate(90deg)}
+}
+@media(max-width:560px){.features{grid-template-columns:1fr}.score-row,.low{grid-template-columns:1fr}.cta-band{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+
+<!-- reusable logo svg -->
+<svg width="0" height="0" style="position:absolute"><defs><g id="vlogo">
+  <path d="M6 20 L19 25 V15 L6 10 Z" fill="#2f6bff"/>
+  <path d="M32 20 L19 25 V15 L32 10 Z" fill="#16307a"/>
+  <path d="M19 15 L6 10 L19 5 L32 10 Z" fill="#f6a723"/>
+  <path d="M19 2 L31 7 L19 12 L7 7 Z" fill="#132244"/>
+  <path d="M31 7 V13" stroke="#f6a723" stroke-width="1.4"/><circle cx="31" cy="14" r="1.4" fill="#f6a723"/>
+</g></defs></svg>
+
+<header><div class="wrap nav">
+  <a class="brand"><img src="{% static 'img/logo.png' %}" alt="Verbo" class="brand-img"></a>
+  <nav class="nav-links">
+    <a class="active">Home</a><a>Practice</a><a>Features</a><a>How it works</a><a>Pricing</a>
+  </nav>
+  <div class="nav-right"><a class="signin" href="{% url 'login' %}">Sign in</a><a class="btn btn-primary" href="{% url 'register_choice' %}">Get Started</a></div>
+</div></header>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="tagpill">Learn <span class="d"></span> Practice <span class="d"></span> Improve</span>
+      <h1>Speak with confidence.<span class="b">Write with clarity.</span></h1>
+      <p>Verbo helps you practice English speaking and writing with intelligent feedback, so you can communicate better, faster.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="{% url 'register_choice' %}">Start practicing <svg class="arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="{% url 'demo_login' %}">Explore Verbo</a>
+      </div>
+      <div class="trust">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/></svg>Safe &amp; secure</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Fast feedback</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.2"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>For learners worldwide</span>
+      </div>
+    </div>
+
+    <!-- laptop device -->
+    <div class="device">
+      <div class="fb fb-1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v-1M8 14V9M12 16V7M16 14V9M20 12v-1"/></svg></span>Great pronunciation!</div>
+      <div class="fb fb-2"><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.2 6.8.8-5 4.7 1.3 6.8L12 17.8 5.9 21l1.3-6.8-5-4.7 6.8-.8z"/></svg></span>+10 points<small>for your practice</small></div>
+      <div class="fb fb-3"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15l5-5 4 4 7-8"/><path d="M20 6h-4M20 6v4"/></svg></span>Keep going!<small>You're improving</small></div>
+
+      <div class="laptop"><div class="screen">
+        <div class="app-top">
+          <span class="app-brand"><svg viewBox="0 0 38 27"><use href="#vlogo"/></svg>Verbo</span>
+          <span class="app-user"><span class="av">L</span>Learner ▾</span>
+        </div>
+        <div class="app-body">
+          <div class="app-side">
+            <a>Home</a><a class="on">Practice</a><a>My Progress</a><a>Vocabulary</a><a>Settings</a>
+          </div>
+          <div class="app-main">
+            <div class="app-h">Good morning, Learner!</div>
+            <div class="app-sub">Keep going — you're doing great!</div>
+            <div class="mini-cards">
+              <div class="mcard">
+                <div class="t">Speaking Practice</div><div class="s">Talk about your daily routine</div>
+                <div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v3"/></svg></div>
+                <div class="tapc">Tap to start</div>
+              </div>
+              <div class="mcard">
+                <div class="t">Writing Feedback</div><div class="s">Improve your writing with AI analysis</div>
+                <div class="wf">I really enjoy <span class="hl">learn english</span> because it opens many opportunities for my <span class="hl">future</span>.</div>
+                <div class="needs">✕ Needs improvement</div>
+                <div class="sugg">View suggestions ›</div>
+              </div>
+            </div>
+            <div class="prog">
+              <div class="ring blue" style="--v:78"><i>78%</i></div><div class="pl">Speaking</div>
+              <div class="ring" style="--v:72"><i>72%</i></div><div class="pl">Writing</div>
+              <div class="pl" style="margin-left:auto">Intermediate<small>Level</small></div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+      <div class="lbase"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="sec"><div class="wrap">
+  <div class="eyebrow">KEY FEATURES</div>
+  <h2>Everything you need to improve your English</h2>
+  <p class="lead">Practice essential skills, get instant feedback and track your progress — all in one place.</p>
+  <div class="features">
+    <div class="fcard"><div class="fi blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v3"/></svg></div>
+      <h3>Speaking Practice</h3><p>Have natural conversations with AI and get instant feedback on your pronunciation, fluency and grammar.</p></div>
+    <div class="fcard"><div class="fi gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div>
+      <h3>Writing Feedback</h3><p>Write essays, emails or short texts and get detailed analysis with clear suggestions for improvement.</p></div>
+    <div class="fcard"><div class="fi blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5c4-1.5 6-.5 8 1 2-1.5 4-2.5 8-1v14c-4-1.5-6-.5-8 1-2-1.5-4-2.5-8-1z"/></svg></div>
+      <h3>Vocabulary</h3><p>Learn useful words and phrases with real examples and personalized practice.</p></div>
+    <div class="fcard"><div class="fi gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l5-5 4 4 7-8"/><path d="M20 6h-4M20 6v4"/></svg></div>
+      <h3>Progress Tracking</h3><p>See your scores, track your growth and stay motivated with clear insights.</p></div>
+  </div>
+</div></section>
+
+<!-- PROGRESS -->
+<section class="sec progress-sec"><div class="wrap pgrid">
+  <div>
+    <div class="eyebrow">YOUR PROGRESS</div>
+    <h2>Track your growth at a glance</h2>
+    <p>See how you're improving with detailed scores, activity charts and personalized feedback.</p>
+    <a class="btn btn-ghost" href="{% url 'demo_login' %}">View full progress <svg class="arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+  <div class="dash">
+    <div class="score-row">
+      <div class="scard"><div class="sh"><span class="si blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v3"/></svg></span>Speaking Score</div>
+        <div class="num">78<small>/100</small></div><div class="bar"><i style="width:78%;background:var(--green)"></i></div></div>
+      <div class="scard"><div class="sh"><span class="si blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg></span>Writing Score</div>
+        <div class="num">72<small>/100</small></div><div class="bar"><i style="width:72%;background:var(--blue)"></i></div></div>
+    </div>
+    <div class="low">
+      <div class="panel"><div class="ph">Weekly Activity</div>
+        <div class="chart"><span class="col" style="height:52%"></span><span class="col" style="height:40%"></span><span class="col" style="height:70%"></span><span class="col" style="height:34%"></span><span class="col" style="height:88%"></span><span class="col" style="height:60%"></span><span class="col" style="height:66%"></span></div>
+        <div class="wk"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+      </div>
+      <div class="panel"><div class="ph">Recent Feedback</div>
+        <div class="fb-list">
+          <div class="fb-item"><span class="fb-dot" style="background:var(--green)"></span><div><b>Great pronunciation!</b><p>Your speaking was clear and natural.</p></div></div>
+          <div class="fb-item"><span class="fb-dot" style="background:var(--gold)"></span><div><b>Grammar suggestion</b><p>Consider using "because" instead of "so".</p></div></div>
+          <div class="fb-item"><span class="fb-dot" style="background:var(--blue)"></span><div><b>Good vocabulary</b><p>You used a great range of words.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- HOW IT WORKS -->
+<section class="sec"><div class="wrap">
+  <div class="eyebrow">HOW VERBO WORKS</div>
+  <h2>Simple steps to better English</h2>
+  <p class="lead">Three easy steps to start improving today.</p>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div class="sic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-4 3.5-6 7-6s7 2 7 6"/></svg></div>
+      <h4>Practice</h4><p>Start a speaking or writing session based on your goals.</p></div>
+    <div class="step-arrow"><svg viewBox="0 0 40 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10h34M28 4l8 6-8 6"/></svg></div>
+    <div class="step"><div class="sn">2</div><div class="sic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v10H8l-4 4z"/><path d="M8 10h8M8 13h5"/></svg></div>
+      <h4>Get Feedback</h4><p>Receive instant, detailed feedback and improvement tips.</p></div>
+    <div class="step-arrow"><svg viewBox="0 0 40 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10h34M28 4l8 6-8 6"/></svg></div>
+    <div class="step"><div class="sn">3</div><div class="sic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l5-5 4 4 7-8"/><path d="M20 6h-4M20 6v4"/></svg></div>
+      <h4>Improve</h4><p>Track your progress and build confidence over time.</p></div>
+  </div>
+</div></section>
+
+<!-- CTA -->
+<div class="wrap"><div class="cta-band">
+  <span class="blob cb1"></span><span class="blob cb2"></span>
+  <a class="brand" style="z-index:1"><img src="{% static 'img/logo.png' %}" alt="Verbo" class="brand-img"></a>
+  <div class="ct" style="z-index:1"><h3>Ready to improve your English?</h3><p>Join thousands of learners who are building better communication skills with Verbo.</p></div>
+  <a class="btn btn-primary" style="z-index:1" href="{% url 'register_choice' %}">Start for free <svg class="arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</div></div>
+
+<!-- FOOTER -->
+<footer><div class="wrap">
+  <div class="foot">
+    <div style="display:flex;align-items:center"><a class="brand" style="color:#fff">Verbo</a><span class="tag">Better English. Brighter opportunities.</span></div>
+    <div class="foot-links"><a>Home</a><a>Practice</a><a>Features</a><a>How it works</a><a>Pricing</a></div>
+    <div class="foot-social">
+      <a aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a aria-label="Telegram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 4 2.5 11.2c-1 .4-1 1.7.1 2l4.6 1.4 1.8 5.3c.3.8 1.3 1 1.9.3l2.5-2.6 4.6 3.4c.7.5 1.7.1 1.9-.7L23 5.4c.2-1-.8-1.8-2-1.4z"/></svg></a>
+      <a aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 8a3 3 0 0 0-2-2c-2-.5-8-.5-8-.5s-6 0-8 .5a3 3 0 0 0-2 2 32 32 0 0 0 0 8 3 3 0 0 0 2 2c2 .5 8 .5 8 .5s6 0 8-.5a3 3 0 0 0 2-2 32 32 0 0 0 0-8zM10 15V9l5 3z"/></svg></a>
+    </div>
+  </div>
+  <div class="foot-bot"><span>© 2026 Verbo — LOCHINBEK JO'RABOYEV. All rights reserved.</span><span class="fl"><a>Terms</a><a>Privacy</a><a>Support</a></span></div>
+</div></footer>
+
+</body>
+</html>

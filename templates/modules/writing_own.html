@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Writing — Verbo{% endblock %}
+{% block content %}
+<div class="page-h">
+  <h1>Write with confidence.</h1>
+  <p class="sub">Put your thoughts into words. We'll help you make them clearer.</p>
+</div>
+
+<div style="position:relative">
+  <span class="sticky y" style="position:absolute;right:-6px;top:-40px;transform:rotate(4deg);z-index:5">Take your<br>time ✦</span>
+  <form method="post" action="{% url 'writing_own_submit' %}" class="editor-wrap">
+    {% csrf_token %}
+    <div class="chips">
+      {% for t in tasks %}
+        <label class="chip{% if forloop.first %} on{% endif %}">
+          <input type="radio" name="task_type" value="{{ t.key }}" {% if forloop.first %}checked{% endif %} style="display:none" onchange="pick(this)">
+          {{ t.label }} · {{ t.cost }} cr
+        </label>
+      {% endfor %}
+    </div>
+
+    <input class="select" id="prompt" name="prompt" placeholder="What are you writing about? (your topic)" style="width:100%;margin-bottom:14px;padding:13px 15px;border-radius:14px">
+
+    <textarea class="editor" name="answer" placeholder="Start writing here…"></textarea>
+
+    <div class="editor-bar">
+      <select class="select"><option>English (US)</option><option>English (UK)</option></select>
+      <span style="color:var(--muted);font-size:.85rem">Credits: <b>{{ credits }}</b></span>
+      <button type="submit" class="btn btn-b" style="margin-left:auto">Check Writing →</button>
+    </div>
+  </form>
+</div>
+
+{% if recent %}
+<div class="list-h"><h3>Recent writing</h3><a href="{% url 'results' %}" class="lk">View all →</a></div>
+<div class="recent">
+  {% for r in recent %}
+  <a href="{% url 'result_detail' r.id %}" class="ri" style="text-decoration:none">
+    <span class="ri-i chip-ic blue" style="width:40px;height:40px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span>
+    <div class="ri-m"><b>{{ r.title|default:"My writing" }}</b><span>{{ r.get_task_type_display }} · {{ r.created_at|date:"M j, Y" }}</span></div>
+    <span class="pct" style="color:var(--blue);margin-right:10px">{{ r.score }}/{{ r.max_score }}</span><span class="status {% if r.score >= r.max_score|add:'-1' %}good{% else %}needs{% endif %}">{% if r.score >= r.max_score|add:'-1' %}Good{% else %}Keep going{% endif %}</span>
+  </a>
+  {% endfor %}
+</div>
+{% endif %}
+
+<script>
+function pick(el){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));el.closest('.chip').classList.add('on');}
+</script>
+{% endblock %}

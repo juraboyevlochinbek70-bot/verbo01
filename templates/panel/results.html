@@ -1,0 +1,12 @@
+{% extends "panel/base_panel.html" %}
+{% block title %}Natijalar — Boshqaruv{% endblock %}
+{% block content %}
+<div class="page-h"><span class="ph-ic blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+  <div><h2>Barcha natijalar</h2><p>O'quvchilar yuborgan barcha topshiriqlar va ballar.</p></div></div>
+<div class="tbl">
+  <div class="tr th"><span>O'quvchi</span><span>Mavzu</span><span>Ball</span><span>Sana</span><span></span></div>
+  {% for r in results %}
+  <div class="tr"><span>{{ r.student.first_name|default:r.student.email }}</span><span>{{ r.title|truncatechars:26 }}</span><span class="sc g">{{ r.score }}/{{ r.max_score }}</span><span>{{ r.created_at|date:"d.m.Y" }}</span><a href="{% url 'result_detail' r.id %}">Ko'rish</a></div>
+  {% empty %}<div class="tr"><span>Hali natija yo'q.</span></div>{% endfor %}
+</div>
+{% endblock %}

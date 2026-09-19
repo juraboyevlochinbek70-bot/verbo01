@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block title %}Natija — Verbo{% endblock %}
+{% block content %}
+<div style="max-width:760px;margin:24px auto">
+  <div class="no-print" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+    <a href="{% url 'results' %}" style="color:var(--muted)">← Natijalar</a>
+    <button onclick="window.print()" class="btn btn-b">📄 PDF qilib saqlash</button>
+  </div>
+
+  <!-- PDFga chiqadigan hujjat -->
+  <div class="doc" id="doc">
+    <!-- BREND SARLAVHASI -->
+    <div class="doc-head">
+      <div class="doc-brand">LOCHINBEK JO'RABOYEV</div>
+      <div class="doc-sub">Multilevel Writing — Natija</div>
+      <a class="doc-link" href="https://verbo.uz">verbo.uz</a>
+    </div>
+
+    <div class="doc-meta">
+      <span>{{ r.get_task_type_display }}</span>
+      <span>{% if r.mode == 'own' %}O'z savoli{% else %}Mock{% endif %}</span>
+      <span>{{ r.created_at|date:"d.m.Y H:i" }}</span>
+    </div>
+
+    <!-- Ball -->
+    <div class="doc-score">
+      <div class="score-circle"><span class="score-num">{{ r.score }}</span><span class="score-max">/ {{ r.max_score }}</span></div>
+      {% if r.level %}<div class="doc-level">Taxminiy daraja: <b>{{ r.level }}</b></div>{% endif %}
+      {% if fb.summary %}<p class="doc-summary">{{ fb.summary }}</p>{% endif %}
+    </div>
+
+    <!-- Savol -->
+    <div class="doc-block">
+      <h3>Savol</h3>
+      <p style="white-space:pre-line">{{ r.prompt_text }}</p>
+    </div>
+
+    <!-- Javob -->
+    <div class="doc-block">
+      <h3>Sizning javobingiz</h3>
+      <p style="white-space:pre-line">{{ r.answer_text }}</p>
+    </div>
+
+    {% if fb.strengths %}
+    <div class="doc-block">
+      <h3>✅ Kuchli tomonlar</h3>
+      <ul>{% for s in fb.strengths %}<li>{{ s }}</li>{% endfor %}</ul>
+    </div>
+    {% endif %}
+
+    {% if fb.errors %}
+    <div class="doc-block">
+      <h3>🔍 Xatolar va tuzatishlar</h3>
+      {% for e in fb.errors %}
+        <div class="err-card">
+          <span class="err-type">{{ e.type }}</span>
+          <div><span class="err-wrong">{{ e.original }}</span> → <span class="err-right">{{ e.correction }}</span></div>
+          {% if e.note %}<div class="err-note">{{ e.note }}</div>{% endif %}
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if fb.advice %}
+    <div class="doc-block">
+      <h3>💡 Maslahat</h3>
+      <p style="white-space:pre-line">{{ fb.advice }}</p>
+    </div>
+    {% endif %}
+
+    <div class="doc-foot">Verbo — LOCHINBEK JO'RABOYEV · verbo.uz</div>
+  </div>
+</div>
+
+<style>
+  .doc{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:34px;box-shadow:var(--shadow)}
+  .doc-head{text-align:center;border-bottom:2px solid var(--brand);padding-bottom:16px;margin-bottom:18px}
+  .doc-brand{font-family:var(--serif);font-size:1.7rem;font-weight:700;letter-spacing:.5px;color:var(--brand)}
+  .doc-sub{color:var(--muted);font-size:.95rem;margin-top:2px}
+  .doc-link{display:inline-block;margin-top:6px;font-weight:600}
+  .doc-meta{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+  .doc-meta span{font-size:.8rem;color:var(--muted);border:1px solid var(--border);padding:3px 10px;border-radius:999px}
+  .doc-score{text-align:center;margin-bottom:8px}
+  .doc-level{margin-top:8px;color:var(--muted)}
+  .doc-summary{color:var(--muted);max-width:520px;margin:12px auto 0}
+  .doc-block{border-top:1px solid var(--border);padding-top:16px;margin-top:16px}
+  .doc-block h3{margin:0 0 8px;font-size:1.1rem}
+  .doc-block ul{margin:0;padding-left:18px;color:var(--muted)}
+  .doc-block p{color:var(--text);margin:0}
+  .doc-foot{text-align:center;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border);margin-top:22px;padding-top:14px}
+
+  /* PDF (chop etish) — doim oq fonda, faqat hujjat ko'rinadi */
+  @media print {
+    nav, footer, .no-print { display: none !important; }
+    body { background: #fff !important; }
+    .doc { border: none !important; box-shadow: none !important; padding: 0 !important; }
+    .doc, .doc * { color: #111 !important; }
+    .doc-brand, .doc-head { color: #1f52d8 !important; border-color: #1f52d8 !important; }
+    .score-circle { background: #1f52d8 !important; box-shadow: none !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .score-num, .score-max { color: #fff !important; }
+    .err-wrong { color: #b91c1c !important; }
+    .err-right { color: #0f8a5f !important; }
+    .doc-meta span, .err-card { border-color: #ccc !important; }
+    a[href]:after { content: ""; }
+  }
+</style>
+{% endblock %}

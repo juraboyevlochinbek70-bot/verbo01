@@ -1,0 +1,48 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Verbo{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+<body>
+<div class="scrim" id="scrim" onclick="tm()"></div>
+<div class="app">
+  <aside class="side" id="side">
+    <a href="{% url 'home' %}" class="side-logo"><img src="{% static 'img/logo.png' %}" alt="Verbo"></a>
+    {% with u=request.resolver_match.url_name %}
+    <nav class="side-nav">
+      <a href="{% url 'home' %}" class="side-link {% if u == 'home' %}on{% endif %}"><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></span>Home</a>
+      <a href="{% url 'writing_own' %}" class="side-link {% if u == 'writing' or u == 'writing_own' or u == 'writing_task' %}on{% endif %}"><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span>Writing</a>
+      <a href="{% url 'speaking' %}" class="side-link {% if u == 'speaking' %}on{% endif %}"><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v3"/></svg></span>Speaking</a>
+      <a href="{% url 'vocabulary' %}" class="side-link {% if u == 'vocabulary' %}on{% endif %}"><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c4-1.5 6-.5 8 1 2-1.5 4-2.5 8-1v14c-4-1.5-6-.5-8 1-2-1.5-4-2.5-8-1z"/><path d="M12 6v14"/></svg></span>Vocabulary<span class="new">NEW</span></a>
+      <a href="{% url 'results' %}" class="side-link {% if u == 'results' or u == 'result_detail' %}on{% endif %}"><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>Results</a>
+      <a href="{% url 'credits' %}" class="side-link {% if u == 'credits' %}on{% endif %}"><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span>Credits</a>
+      <div class="side-div"></div>
+      <a href="#" class="side-link"><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8 2 2 0 1 1-2.8 2.8 1.6 1.6 0 0 0-2.7 1.1 2 2 0 0 1-4 0 1.6 1.6 0 0 0-2.7-1.1 2 2 0 1 1-2.8-2.8A1.6 1.6 0 0 0 3 14a2 2 0 0 1 0-4 1.6 1.6 0 0 0 1.6-2.8 2 2 0 1 1 2.8-2.8A1.6 1.6 0 0 0 10 3.6a2 2 0 0 1 4 0 1.6 1.6 0 0 0 2.7 1.1 2 2 0 1 1 2.8 2.8A1.6 1.6 0 0 0 20.4 10a2 2 0 0 1 0 4 1.6 1.6 0 0 0-1 1z"/></svg></span>Settings</a>
+      <a href="#" class="side-link"><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1 .9-1 1.7"/><circle cx="12" cy="16.5" r=".6" fill="currentColor"/></svg></span>Help &amp; Support</a>
+    </nav>
+    {% endwith %}
+    <div class="side-user"><span class="su-av">{{ user.first_name|first|default:"L"|upper }}</span><div class="su-t"><b>{{ user.first_name|default:"Learner" }}</b><span>Student</span></div></div>
+  </aside>
+
+  <div class="main">
+    <div class="top">
+      <button class="menu-btn" onclick="tm()">☰</button>
+      <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg><input placeholder="Search anything..."><span class="kbd">Ctrl + K</span></div>
+      <div class="top-r"><button class="bell">🔔</button><a href="{% url 'logout' %}" class="top-u"><span class="su-av">{{ user.first_name|first|default:"L"|upper }}</span>{{ user.first_name|default:"Learner" }} ▾</a></div>
+    </div>
+    <div class="content">
+      {% if messages %}<ul class="messages">{% for m in messages %}<li>{{ m }}</li>{% endfor %}</ul>{% endif %}
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+</div>
+<script>function tm(){document.getElementById('side').classList.toggle('open');document.getElementById('scrim').classList.toggle('show');}</script>
+</body>
+</html>

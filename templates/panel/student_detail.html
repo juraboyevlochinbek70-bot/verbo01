@@ -1,0 +1,26 @@
+{% extends "panel/base_panel.html" %}
+{% block title %}{{ s.first_name }} — Boshqaruv{% endblock %}
+{% block content %}
+<a href="{% url 'panel_students' %}" style="color:var(--muted)">← O'quvchilar</a>
+<div class="write-hero" style="margin-top:12px">
+  <div class="wh-txt" style="display:flex;gap:18px;align-items:center">
+    <span class="uav" style="width:64px;height:64px;font-size:1.4rem">{{ s.first_name|first|default:"?"|upper }}</span>
+    <div><h2 style="margin:0 0 4px">{{ s.first_name|default:"—" }}</h2>
+      <p style="margin:0;color:var(--muted)">{{ s.email|default:s.phone }} · {{ s.get_tier_display }} · Qo'shilgan {{ s.date_joined|date:"d.m.Y" }}</p></div>
+  </div>
+</div>
+<div class="stat3">
+  <div class="st"><span class="sic blue">🪙</span><div><b>{{ s.credits }}</b><span>Kredit</span></div></div>
+  <div class="st"><span class="sic gold">📄</span><div><b>{{ count }}</b><span>Topshiriq</span></div></div>
+  <div class="st"><span class="sic green">◔</span><div><b>{{ avg }}%</b><span>O'rtacha ball</span></div></div>
+</div>
+<div class="list-h"><h3>Yuborgan savollari va natijalari</h3></div>
+{% if results %}
+<div class="tbl">
+  <div class="tr th"><span>Mavzu / Savol</span><span>Turi</span><span>Ball</span><span>Sana</span><span></span></div>
+  {% for r in results %}
+  <div class="tr"><span>{{ r.title|default:r.prompt_text|truncatechars:34 }}</span><span>{% if r.mode == 'own' %}O'z savoli{% else %}Mock{% endif %}</span><span class="sc g">{{ r.score }}/{{ r.max_score }}</span><span>{{ r.created_at|date:"d.m.Y" }}</span><a href="{% url 'result_detail' r.id %}">Ko'rish</a></div>
+  {% endfor %}
+</div>
+{% else %}<div class="empty"><div class="big">📄</div><h3>Hali topshiriq yo'q</h3></div>{% endif %}
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "panel/base_panel.html" %}
+{% block title %}Dashboard — Boshqaruv{% endblock %}
+{% block content %}
+<div class="page-h"><span class="ph-ic blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="5" rx="2"/><rect x="13" y="10" width="8" height="11" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/></svg></span>
+  <div><h2>Boshqaruv paneli</h2><p>Platformangiz statistikasi va o'quvchilar faoliyati bir joyda.</p></div></div>
+
+<div class="stat3" style="grid-template-columns:repeat(4,1fr)">
+  <div class="st"><span class="sic blue">👥</span><div><b>{{ n_students }}</b><span>O'quvchilar</span></div></div>
+  <div class="st"><span class="sic gold">📄</span><div><b>{{ n_results }}</b><span>Topshiriqlar</span></div></div>
+  <div class="st"><span class="sic green">◔</span><div><b>{{ avg }}%</b><span>O'rtacha ball</span></div></div>
+  <div class="st"><span class="sic blue">🪙</span><div><b>{{ n_credits }}</b><span>Jami kredit</span></div></div>
+</div>
+
+<div class="cred-grid" style="grid-template-columns:1fr 1.2fr;align-items:start">
+  <div>
+    <div class="list-h"><h3>So'nggi o'quvchilar</h3><a class="lk" href="{% url 'panel_students' %}">Barchasi →</a></div>
+    <div class="recent">
+      {% for u in recent_students %}
+      <a href="{% url 'panel_student' u.id %}" class="ri" style="text-decoration:none">
+        <span class="uav" style="width:38px;height:38px">{{ u.first_name|first|default:"?"|upper }}</span>
+        <div class="ri-m"><b>{{ u.first_name|default:"—" }}</b><span>{{ u.email|default:u.phone }} · {{ u.get_tier_display }}</span></div>
+        <span class="sc g">{{ u.credits }} 🪙</span></a>
+      {% empty %}<div class="empty"><p>Hali o'quvchi yo'q.</p></div>{% endfor %}
+    </div>
+  </div>
+  <div>
+    <div class="list-h"><h3>So'nggi topshiriqlar</h3><a class="lk" href="{% url 'panel_results' %}">Barchasi →</a></div>
+    <div class="tbl">
+      <div class="tr th" style="grid-template-columns:1.6fr 1.4fr .8fr .8fr"><span>O'quvchi</span><span>Mavzu</span><span>Ball</span><span>Sana</span></div>
+      {% for r in recent_results %}
+      <div class="tr" style="grid-template-columns:1.6fr 1.4fr .8fr .8fr"><span>{{ r.student.first_name|default:r.student.email }}</span><span>{{ r.title|truncatechars:20 }}</span><span class="sc g">{{ r.score }}/{{ r.max_score }}</span><span>{{ r.created_at|date:"d.m" }}</span></div>
+      {% empty %}<div class="tr"><span>Hali topshiriq yo'q.</span></div>{% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

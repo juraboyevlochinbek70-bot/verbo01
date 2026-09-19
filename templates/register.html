@@ -1,0 +1,70 @@
+{% extends "base_plain.html" %}
+{% load static %}
+{% block title %}Ro'yxatdan o'tish — Verbo{% endblock %}
+{% block content %}
+<div class="auth">
+  <div class="auth-card">
+    <div class="auth-mark"><img src="{% static 'img/logo.png' %}" alt="Verbo" class="brand-logo brand-logo-sm"></div>
+    <div class="auth-title">Ro'yxatdan o'tish</div>
+    <p class="auth-sub">Bepul boshlang — 3 ta xush kelibsiz krediti.</p>
+    {% if not registration_open %}
+    <div class="auth-note">SMS va Email vaqtincha o'chirilgan. Dizaynni ko'rish uchun demo bilan kiring.</div>
+    <a href="{% url 'demo_login' %}" class="auth-btn" style="display:block;text-align:center;text-decoration:none;margin-bottom:18px">Demo bilan kirish</a>
+    {% endif %}
+
+    <div class="seg">
+      <button type="button" class="seg-btn" id="seg-phone" onclick="setTab('phone')">Telefon</button>
+      <button type="button" class="seg-btn" id="seg-email" onclick="setTab('email')">Email</button>
+    </div>
+
+    <!-- Telefon -->
+    <div class="apanel {% if not registration_open %}form-dim{% endif %}" id="panel-phone">
+      {% if active == 'phone' and error %}<ul class="auth-err"><li>{{ error }}</li></ul>{% endif %}
+      <form method="post" action="{% url 'phone_register' %}">
+        {% csrf_token %}
+        <div class="afield"><label>Telefon raqami</label>
+          <input type="tel" name="phone" value="{{ phone|default:'+998 ' }}" placeholder="+998 90 123 45 67" required></div>
+        <div class="afield"><label>Ism</label>
+          <input type="text" name="first_name" value="{{ name|default:'' }}" placeholder="Ismingiz" required></div>
+        <div class="afield"><label>Parol</label>
+          <input type="password" name="password" placeholder="Kamida 6 belgi" required></div>
+        <button type="submit" class="auth-btn">Kod olish</button>
+      </form>
+    </div>
+
+    <!-- Email -->
+    <div class="apanel {% if not registration_open %}form-dim{% endif %}" id="panel-email">
+      <form method="post" action="{% url 'signup' %}">
+        {% csrf_token %}
+        <div class="afield"><label>Email</label>{{ form.email }}
+          {% if form.email.errors %}<ul class="auth-err">{% for e in form.email.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}</div>
+        <div class="afield"><label>Ism</label>{{ form.first_name }}
+          {% if form.first_name.errors %}<ul class="auth-err">{% for e in form.first_name.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}</div>
+        <div class="afield"><label>Parol</label>{{ form.password1 }}
+          {% if form.password1.errors %}<ul class="auth-err">{% for e in form.password1.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}</div>
+        <div class="afield"><label>Parolni takrorlang</label>{{ form.password2 }}
+          {% if form.password2.errors %}<ul class="auth-err">{% for e in form.password2.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}</div>
+        <button type="submit" class="auth-btn">Ro'yxatdan o'tish</button>
+      </form>
+    </div>
+
+    <p class="auth-foot">Akkauntingiz bormi? <a href="{% url 'login' %}">Kiring</a></p>
+  </div>
+</div>
+
+<script>
+  function setTab(t){
+    document.getElementById('panel-phone').classList.toggle('on', t==='phone');
+    document.getElementById('panel-email').classList.toggle('on', t==='email');
+    document.getElementById('seg-phone').classList.toggle('active', t==='phone');
+    document.getElementById('seg-email').classList.toggle('active', t==='email');
+  }
+  setTab("{{ active|default:'phone' }}");
+</script>
+<style>
+  /* email formadagi Django inputlariga auth uslubini beramiz */
+  #panel-email input { width:100%; padding:13px 15px; border-radius:11px; font-size:1rem; font-family:var(--font);
+    background:#fff; border:1px solid var(--border); color:var(--text); }
+  #panel-email input:focus { outline:none; border-color:var(--brand); box-shadow:0 0 0 3px var(--brand-soft); }
+</style>
+{% endblock %}

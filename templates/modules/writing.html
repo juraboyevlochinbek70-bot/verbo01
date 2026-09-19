@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Guided tasks — Verbo{% endblock %}
+{% block content %}
+<div class="page-h">
+  <h1>Guided writing tasks.</h1>
+  <p class="sub">Prefer a prompt to get started? Pick a task and we'll check it for you. <a href="{% url 'writing_own' %}" style="color:var(--blue);font-weight:600">Or write your own →</a></p>
+</div>
+{% if grouped %}
+  {% for g in grouped %}
+    <div class="list-h"><h3>{{ g.label }}</h3></div>
+    <div class="feat" style="grid-template-columns:repeat(3,1fr)">
+      {% for t in g.topics %}
+        <a href="{% url 'writing_task' t.id %}" class="feat-c">
+          <span class="chip-ic blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span>
+          <h3>{{ t.title }}</h3><p>{{ t.prompt_text|truncatechars:64 }}</p>
+        </a>
+      {% endfor %}
+    </div>
+  {% endfor %}
+{% else %}
+  <div class="empty"><div class="big">✍️</div><h3>No guided tasks yet</h3><p>Start with your own writing instead — it works great.</p><a href="{% url 'writing_own' %}" class="btn btn-b">Start writing</a></div>
+{% endif %}
+{% endblock %}

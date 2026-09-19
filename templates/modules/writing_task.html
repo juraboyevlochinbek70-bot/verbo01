@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ topic.title }} — Verbo{% endblock %}
+{% block content %}
+<div class="page-h"><h1>{{ topic.title }}</h1><p class="sub">{{ task.label }} · {{ task.words }}</p></div>
+<div class="editor-wrap">
+  <div style="background:var(--pb);border-radius:14px;padding:16px 18px;margin-bottom:16px;white-space:pre-line;color:var(--ink-2)">{{ topic.prompt_text }}</div>
+  <form method="post" action="{% url 'writing_submit' topic.id %}">
+    {% csrf_token %}
+    <textarea class="editor" name="answer" placeholder="Write your answer here…"></textarea>
+    <div class="editor-bar">
+      <a href="{% url 'writing' %}" style="color:var(--muted)">← Back</a>
+      <button type="submit" class="btn btn-b" style="margin-left:auto">Check Writing →</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

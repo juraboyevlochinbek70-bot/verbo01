@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Speaking — Verbo{% endblock %}
+{% block content %}
+<div class="page-h">
+  <h1>Speak more. Worry less.</h1>
+  <p class="sub">Practice naturally and build confidence — one conversation at a time.</p>
+</div>
+
+<div style="display:grid;grid-template-columns:1.15fr 1fr;gap:22px;align-items:start" class="sp-grid">
+  <div style="position:relative">
+    <span class="sticky v" style="position:absolute;left:-6px;top:-30px;transform:rotate(-5deg);z-index:6">Ready when<br>you are ✦</span>
+    <div class="mic-stage">
+      <div class="mic-halo"><span class="r1"></span><span class="r2"></span>
+        <div class="mic-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v3"/></svg></div>
+      </div>
+      <h3>Tap to start speaking</h3>
+      <p>Pick a topic, speak your answer, and get gentle feedback.</p>
+      <div class="editor-bar" style="justify-content:center;margin-top:20px">
+        <select class="select"><option>English (US)</option><option>English (UK)</option></select>
+        <span class="limit-pill">Coming soon ✦</span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="list-h" style="margin-top:0"><h3>Practice topics</h3></div>
+    <div class="topic-list">
+      <div class="topic"><span class="chip-ic blue" style="width:40px;height:40px">🗣️</span><div><b>Daily Life</b><span>Talk about your routine and hobbies.</span></div></div>
+      <div class="topic"><span class="chip-ic violet" style="width:40px;height:40px">💼</span><div><b>Work &amp; Career</b><span>Describe your job and future plans.</span></div></div>
+      <div class="topic"><span class="chip-ic green" style="width:40px;height:40px">✈️</span><div><b>Travel</b><span>Share trips, places and culture.</span></div></div>
+      <div class="topic"><span class="chip-ic peach" style="width:40px;height:40px">💬</span><div><b>General Conversation</b><span>Everyday topics and questions.</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="list-h"><h3>Recent sessions</h3></div>
+<div class="empty"><div class="big">🎙️</div><h3>Your sessions will appear here</h3><p>Speaking practice is on the way — your recent sessions and feedback will show up here.</p></div>
+{% endblock %}

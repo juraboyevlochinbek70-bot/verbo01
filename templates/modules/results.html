@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Results — Verbo{% endblock %}
+{% block content %}
+<div class="page-h" style="position:relative">
+  <span class="sticky g" style="position:absolute;right:0;top:-8px;transform:rotate(4deg)">You're getting<br>there ✦</span>
+  <h1>You're making progress.</h1>
+  <p class="sub">See your progress, learn from your mistakes, and keep moving forward.</p>
+</div>
+
+<div class="result-top">
+  <div class="donut" style="--v:{{ avg }};--c:var(--green)"><i><b>{{ avg }}%</b><span>Overall</span></i></div>
+  <div class="mrows">
+    <div class="mrow"><span class="mi chip-ic blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span><div class="mtxt"><div class="mtop"><span>Writing</span><b>{{ avg }}%</b></div><div class="bar"><i style="width:{{ avg }}%;background:var(--blue)"></i></div></div></div>
+    <div class="mrow"><span class="mi chip-ic violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v3"/></svg></span><div class="mtxt"><div class="mtop"><span>Speaking</span><b style="color:var(--muted)">Soon</b></div><div class="bar"><i style="width:0"></i></div></div></div>
+    <div class="mrow"><span class="mi chip-ic peach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></span><div class="mtxt"><div class="mtop"><span>Grammar</span><b style="color:var(--muted)">From writing</b></div><div class="bar"><i style="width:{{ avg }}%;background:var(--peach)"></i></div></div></div>
+    <div class="mrow"><span class="mi chip-ic green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5c4-1.5 6-.5 8 1 2-1.5 4-2.5 8-1v14c-4-1.5-6-.5-8 1-2-1.5-4-2.5-8-1z"/></svg></span><div class="mtxt"><div class="mtop"><span>Vocabulary</span><b style="color:var(--muted)">Soon</b></div><div class="bar"><i style="width:0"></i></div></div></div>
+  </div>
+</div>
+
+<div class="list-h"><h3>Recent activity</h3></div>
+{% if results %}
+<div class="recent">
+  {% for r in results %}
+  <a href="{% url 'result_detail' r.id %}" class="ri" style="text-decoration:none">
+    <span class="ri-i chip-ic blue" style="width:40px;height:40px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span>
+    <div class="ri-m"><b>{{ r.title|default:"My writing" }}</b><span>Writing · {{ r.created_at|date:"M j, Y" }}</span></div>
+    <span class="pct" style="color:var(--blue);margin-right:10px">{{ r.score }}/{{ r.max_score }}</span>
+    <span class="status {% if r.score >= r.max_score|add:'-1' %}good{% else %}needs{% endif %}">{% if r.score >= r.max_score|add:'-1' %}Good{% else %}Keep going{% endif %}</span>
+  </a>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty"><div class="big">📊</div><h3>No results yet</h3><p>Check your first piece of writing and your progress will show here.</p><a href="{% url 'writing_own' %}" class="btn btn-b">Start writing</a></div>
+{% endif %}
+
+<div class="card" style="margin-top:22px;display:flex;align-items:center;gap:16px">
+  <span style="font-size:2rem">🏆</span>
+  <div><b class="hand" style="font-size:1.35rem;color:var(--green)">You're doing great!</b><p style="color:var(--muted);margin:2px 0 0">Keep going — your effort shows.</p></div>
+</div>
+{% endblock %}

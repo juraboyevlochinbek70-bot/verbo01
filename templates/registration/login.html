@@ -1,0 +1,17 @@
+{% extends "base_plain.html" %}
+{% load static %}
+{% block title %}Kirish — Verbo{% endblock %}
+{% block content %}
+<div class="auth"><div class="auth-card">
+  <div class="auth-mark"><img src="{% static 'img/logo.png' %}" alt="Verbo" class="brand-logo brand-logo-sm"></div>
+  <div class="auth-title">Kirish</div>
+  <p class="auth-sub">Email va parolingiz bilan</p>
+  <form method="post">{% csrf_token %}
+    {% if form.non_field_errors %}<ul class="auth-err">{% for e in form.non_field_errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+    <div class="afield"><label>Email</label>{{ form.username }}</div>
+    <div class="afield"><label>Parol</label>{{ form.password }}</div>
+    <button type="submit" class="auth-btn">Kirish</button>
+  </form>
+  <p class="auth-foot">Akkauntingiz yo'qmi? <a href="{% url 'register_choice' %}">Ro'yxatdan o'ting</a></p>
+</div></div>
+{% endblock %}

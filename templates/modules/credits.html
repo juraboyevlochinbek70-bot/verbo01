@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Credits — Verbo{% endblock %}
+{% block content %}
+<div class="page-h" style="position:relative">
+  <span class="sticky pk" style="position:absolute;right:0;top:-8px;transform:rotate(4deg)">More practice.<br>More progress.</span>
+  <h1>Keep the practice going.</h1><p class="sub">Use your credits to keep writing, speaking, and improving.</p>
+</div>
+
+<div class="credit-hero">
+  <div class="balance">
+    <div class="b-lab">Your credits</div>
+    <div class="b-num">{{ credits }}</div>
+    <div class="b-sub">credits available</div>
+    <a href="#" class="btn btn-w">Buy Credits →</a>
+    <svg class="b-scene" viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="80" cy="104" rx="60" ry="10" fill="#f3ead4"/>
+      <circle cx="66" cy="86" r="26" fill="#f6c445"/><circle cx="66" cy="86" r="20" fill="#ffd76b"/><path d="M60 78 L72 78 M66 74 L66 98 M60 94 L72 94" stroke="#c99022" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="104" cy="94" r="17" fill="#f6c445"/><circle cx="104" cy="94" r="12" fill="#ffd76b"/>
+      <path d="M118 80c9-2 14-9 13-19-9 2-15 9-13 19z" fill="#8fe9c4"/><path d="M120 82c0-12 0-22 0-30" stroke="#5fd3a4" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M30 74c8-2 12-8 11-16-8 2-13 8-11 16z" fill="#8fe9c4"/>
+    </svg>
+  </div>
+  <div class="uses-stack">
+    <div class="use-row"><span class="uc-ic chip-ic blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span><div style="flex:1"><b>Writing check</b><span>1 credit</span></div></div>
+    <div class="use-row"><span class="uc-ic chip-ic violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v3"/></svg></span><div style="flex:1"><b>Speaking practice</b><span>1 credit</span></div></div>
+    <div class="use-row"><span class="uc-ic chip-ic green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg></span><div style="flex:1"><b>Credits refresh</b><span>Monthly</span></div></div>
+  </div>
+</div>
+
+<div class="list-h" style="margin-bottom:2px"><h2>Choose a credit package</h2></div>
+<p class="pick-sub">Pick the plan that fits your goals.</p>
+<div class="pkgs">
+  {% for p in packages %}
+  <div class="pkg {% if p.tag %}hot p2{% else %}{% if forloop.first %}p1{% else %}p3{% endif %}{% endif %}">
+    <span class="pk-blob"></span>
+    {% if p.tag %}<span class="badge">{{ p.tag }}</span>{% endif %}
+    <svg class="pk-illo" viewBox="0 0 52 52">
+      {% if p.color == 'blue' %}<rect x="10" y="34" width="32" height="8" rx="2" fill="#8b6cf0"/><rect x="13" y="26" width="26" height="8" rx="2" fill="#4f6ae0"/><path d="M22 26c2-8 8-10 12-8-2 8-8 10-12 8z" fill="#34c98a"/>
+      {% elif p.color == 'violet' %}<circle cx="26" cy="30" r="15" fill="#ffd76b"/><path d="M14 16l5 7 7-9 7 9 5-7-2 12H16z" fill="#f6c445"/><circle cx="26" cy="30" r="6" fill="#fff8e0"/>
+      {% else %}<path d="M12 30a14 14 0 0 1 28 0" fill="none" stroke="#4f6ae0" stroke-width="4" stroke-linecap="round"/><rect x="8" y="28" width="9" height="16" rx="4" fill="#4f6ae0"/><rect x="35" y="28" width="9" height="16" rx="4" fill="#4f6ae0"/>{% endif %}
+    </svg>
+    <div class="pk-name">{{ p.name }}</div>
+    <div class="pk-cr">{{ p.credits }} <span style="font-size:.9rem;color:var(--muted);font-weight:600">credits</span></div>
+    <div class="pk-desc">{{ p.desc }}</div>
+    <a href="#" class="btn {% if p.tag %}btn-b{% else %}btn-w{% endif %} block">Get {{ p.credits }} Credits →</a>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="journey">
+  <span class="sticky b" style="transform:rotate(-4deg)">Small steps.<br>Big dreams.</span>
+  <div><h3>Your English journey is worth it.</h3><p style="color:var(--muted);margin:4px 0 0">Every credit is another step forward.</p></div>
+  <svg class="j-scene" viewBox="0 0 150 90"><ellipse cx="75" cy="80" rx="60" ry="8" fill="#dbe4fb"/><rect x="40" y="40" width="70" height="40" rx="8" fill="#2f3a63"/><path d="M60 52 L75 70 L90 52" fill="none" stroke="#7f9bff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="30" cy="56" r="10" fill="#f2c6a0"/><path d="M22 52c0-8 16-8 16 0" fill="#2b2440"/><path d="M118 60c8-2 12-10 11-20-8 2-13 10-11 20z" fill="#8fe9c4"/></svg>
+</div>
+{% endblock %}

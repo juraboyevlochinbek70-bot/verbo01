@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Sessiya — Verbo{% endblock %}
+{% block content %}
+<div class="empty"><div class="big">🚧</div><h3>{{ kind }} moduli tez orada</h3><p style="color:var(--muted)">Qolgan urinish: {{ remaining }}</p><a href="{% url 'home' %}" class="btn btn-b" style="margin-top:14px">Bosh sahifa</a></div>
+{% endblock %}

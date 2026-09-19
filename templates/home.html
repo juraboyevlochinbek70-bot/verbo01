@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Home — Verbo{% endblock %}
+{% block content %}
+<div class="hero">
+  <div class="hero-l">
+    <span class="mini-pill">Small steps. Big results. ✦</span>
+    <h1 style="margin:14px 0 16px">Better <span class="hl">English</span>.<br>Brighter <span class="hl2">Future</span>.</h1>
+    <p>Build stronger English skills through writing, speaking and vocabulary practice.</p>
+    <a href="{% url 'writing_own' %}" class="btn btn-b">Start Learning →</a>
+  </div>
+  <div class="hero-r">
+    <div class="scene-wrap">
+      <div class="scene-bg"></div>
+      <span class="spark sp1"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2.4 7.2L22 9.6l-6 4.4 2 7.6L12 17l-6 4.6 2-7.6-6-4.4 7.6-2.4z"/></svg></span>
+      <span class="spark sp2"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg></span>
+      <span class="spark sp3"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg></span>
+
+      <svg viewBox="0 0 400 350" class="scene" xmlns="http://www.w3.org/2000/svg">
+        <!-- window -->
+        <rect x="238" y="18" width="120" height="120" rx="12" fill="#eaf2ff" stroke="#d6e2f7" stroke-width="3"/>
+        <path d="M298 18v120M238 78h120" stroke="#d6e2f7" stroke-width="3"/>
+        <circle cx="330" cy="52" r="16" fill="#fde9c0"/>
+        <path d="M250 120c6-20 14-30 14-46 8 14 6 30 0 46z" fill="#34c98a"/>
+        <path d="M262 120c-4-16 0-30 8-40 2 16-2 30-8 40z" fill="#10b981"/>
+        <!-- desk -->
+        <rect x="20" y="286" width="360" height="16" rx="8" fill="#e8ceb0"/>
+        <ellipse cx="200" cy="312" rx="180" ry="16" fill="#e7ddd0" opacity=".6"/>
+        <!-- plant left -->
+        <path d="M56 286c-8-18-6-36 4-50 6 16 6 34-4 50z" fill="#34c98a"/><path d="M64 286c8-16 20-24 34-24-6 16-18 26-34 24z" fill="#10b981"/>
+        <path d="M44 286h44l-5 16a5 5 0 0 1-5 4H54a5 5 0 0 1-5-4z" fill="#f6a37b"/>
+        <!-- books -->
+        <rect x="300" y="270" width="64" height="14" rx="4" fill="#8b6cf0"/><rect x="306" y="256" width="64" height="14" rx="4" fill="#4f6ae0"/><rect x="298" y="242" width="64" height="14" rx="4" fill="#10b981"/>
+        <!-- CHARACTER -->
+        <!-- hoodie shoulders -->
+        <path d="M120 302c0-46 34-70 80-70s80 24 80 70z" fill="#2f3a63"/>
+        <path d="M158 250c8 14 76 14 84 0-6 20-78 20-84 0z" fill="#26315480"/>
+        <!-- neck -->
+        <rect x="188" y="212" width="24" height="26" rx="10" fill="#eab48a"/>
+        <!-- head -->
+        <circle cx="200" cy="188" r="42" fill="#f2c6a0"/>
+        <!-- hair -->
+        <path d="M160 184c-2-40 26-64 40-64s42 24 40 64c-8-22-22-30-40-30s-32 8-40 30z" fill="#2b2440"/>
+        <!-- headphones -->
+        <path d="M156 188a44 44 0 0 1 88 0" fill="none" stroke="#8b6cf0" stroke-width="9" stroke-linecap="round"/>
+        <rect x="150" y="182" width="18" height="30" rx="9" fill="#8b6cf0"/><rect x="232" y="182" width="18" height="30" rx="9" fill="#8b6cf0"/>
+        <!-- face -->
+        <circle cx="186" cy="190" r="4" fill="#2b2440"/><circle cx="214" cy="190" r="4" fill="#2b2440"/>
+        <path d="M190 204c6 6 14 6 20 0" fill="none" stroke="#c98a63" stroke-width="3.5" stroke-linecap="round"/>
+        <!-- laptop -->
+        <rect x="120" y="256" width="160" height="60" rx="10" fill="#2a3554"/>
+        <rect x="120" y="256" width="160" height="60" rx="10" fill="none" stroke="#1f2846" stroke-width="2"/>
+        <path d="M178 274 L200 300 L222 274" fill="none" stroke="#7f9bff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- coffee -->
+        <path d="M92 296h30v14a10 10 0 0 1-10 10h-10a10 10 0 0 1-10-10z" fill="#fff" stroke="#e2e9f6" stroke-width="2"/><path d="M122 300a8 8 0 0 1 0 14" fill="none" stroke="#e2e9f6" stroke-width="3"/>
+        <!-- cat -->
+        <ellipse cx="330" cy="300" rx="30" ry="14" fill="#f6a37b"/><path d="M312 296c-2-6 2-10 6-8M348 296c2-6-2-10-6-8" stroke="#f6a37b" stroke-width="6" stroke-linecap="round"/><circle cx="318" cy="298" r="2" fill="#2b2440"/>
+        <!-- pencil -->
+        <g transform="rotate(-24 96 268)"><rect x="90" y="244" width="10" height="46" rx="3" fill="#f7b955"/><path d="M90 290 L95 302 L100 290 Z" fill="#2b2440"/><rect x="90" y="244" width="10" height="7" rx="2" fill="#f4a3c0"/></g>
+      </svg>
+
+      <!-- floating cards -->
+      <div class="float wod"><div class="ft-lab">Word of the day</div><div class="word">serendipity</div><div class="mean">the chance occurrence of something pleasant</div></div>
+      <div class="float fstat s1"><span class="fi chip-ic blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span><div><b>86%</b><span>Writing</span></div></div>
+      <div class="float fstat s2"><span class="fi chip-ic violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v3"/></svg></span><div><b style="color:var(--green)">+12%</b><span>Speaking</span></div></div>
+      <span class="sticky y fsticky">Keep going! ✦</span>
+    </div>
+  </div>
+</div>
+
+<div class="feat">
+  <a href="{% url 'writing_own' %}" class="feat-c tb"><span class="chip-ic blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span><h3>Writing</h3><p>Get clear feedback and improve your skills.</p><span class="feat-arrow">→</span></a>
+  <a href="{% url 'speaking' %}" class="feat-c tg"><span class="chip-ic green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v3"/></svg></span><h3>Speaking</h3><p>Practice naturally and build confidence.</p><span class="feat-arrow">→</span></a>
+  <a href="{% url 'vocabulary' %}" class="feat-c tv"><span class="chip-ic violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5c4-1.5 6-.5 8 1 2-1.5 4-2.5 8-1v14c-4-1.5-6-.5-8 1-2-1.5-4-2.5-8-1z"/><path d="M12 6v14"/></svg></span><h3>Vocabulary</h3><p>Learn new words with fun quizzes.</p><span class="feat-arrow">→</span></a>
+  <a href="{% url 'results' %}" class="feat-c tp"><span class="chip-ic peach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><h3>Results</h3><p>Track your progress and reach your goals.</p><span class="feat-arrow">→</span></a>
+</div>
+
+<div class="prog-head"><h2>Your progress</h2><span class="hand">Keep going! You're doing great!</span></div>
+<div class="prog">
+  <span class="sticky y" style="position:absolute;right:-4px;top:-34px;transform:rotate(-4deg)">You're getting<br>better!</span>
+  <div class="pcard"><div class="pi-row"><span class="chip-ic blue" style="width:36px;height:36px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span><span style="color:var(--muted);font-size:.85rem">Writing</span></div><b>{{ writing_done|default:0 }}</b><span>completed</span></div>
+  <div class="pcard"><div class="pi-row"><span class="chip-ic green" style="width:36px;height:36px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v3"/></svg></span><span style="color:var(--muted);font-size:.85rem">Speaking</span></div><b>0</b><span>completed</span></div>
+  <div class="pcard"><div class="pi-row"><span class="chip-ic violet" style="width:36px;height:36px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5c4-1.5 6-.5 8 1 2-1.5 4-2.5 8-1v14c-4-1.5-6-.5-8 1-2-1.5-4-2.5-8-1z"/></svg></span><span style="color:var(--muted);font-size:.85rem">Vocabulary</span></div><b>0</b><span>completed</span></div>
+  <div class="pcard"><div class="pi-row"><span class="chip-ic peach" style="width:36px;height:36px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><span style="color:var(--muted);font-size:.85rem">Total Credits</span></div><b>{{ user.credits }}</b><span>available</span></div>
+</div>
+{% endblock %}

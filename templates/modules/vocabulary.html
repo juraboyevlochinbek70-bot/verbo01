@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Vocabulary — Verbo{% endblock %}
+{% block content %}
+<div class="page-h" style="position:relative">
+  <span class="sticky y" style="position:absolute;right:0;top:-10px;transform:rotate(5deg)">Free quizzes! ✨</span>
+  <h1>Expand your vocabulary,<br>open new doors.</h1>
+  <p class="sub">Learn new words, test yourself, and build a stronger English vocabulary — one step at a time.</p>
+</div>
+
+<div class="search" style="max-width:none;margin-bottom:4px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg><input placeholder="Search quizzes…"></div>
+<div class="vtabs">
+  <span class="vtab on">All</span>
+  {% for c in categories %}<span class="vtab">{{ c.label }}</span>{% endfor %}
+</div>
+
+<div class="list-h" style="margin-top:0"><h3>Available quizzes</h3><a href="#" class="lk">View all →</a></div>
+<div class="quiz-grid">
+  {% for q in quizzes %}
+  <div class="quiz">
+    <div class="quiz-top"><span class="chip-ic {{ q.color }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c4-1.5 6-.5 8 1 2-1.5 4-2.5 8-1v14c-4-1.5-6-.5-8 1-2-1.5-4-2.5-8-1z"/><path d="M12 6v14"/></svg></span>
+      <div style="flex:1"><h3>{{ q.title }}</h3><p class="desc">{{ q.desc }}</p></div>
+      <span class="free">FREE</span></div>
+    <div class="quiz-meta"><span>{{ q.words }} words</span><span class="dot"></span><span class="diff">{{ q.diff }}</span></div>
+    <a href="#" class="btn btn-b block">Start Quiz →</a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

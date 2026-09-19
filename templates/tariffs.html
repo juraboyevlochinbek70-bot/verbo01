@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Tariflar — Verbo{% endblock %}
+{% block content %}
+<section class="section-title">
+  <h1>Tariflar</h1>
+  <p>Har bir tarif Speaking va Writing uchun alohida limit beradi. Har oy yoki limit tugagach yangilanadi.</p>
+</section>
+<div class="tiers">
+  {% for t in tiers %}
+  <div class="tier {% if t.key == 'standart' %}featured{% endif %}">
+    {% if t.key == 'standart' %}<div class="badge">Ommabop</div>{% endif %}
+    <h3>{{ t.label }}</h3>
+    <div class="price">{{ t.price|floatformat:0 }} <small>soʻm / oy</small></div>
+    <ul>
+      <li>🎙️ Speaking: <b>{{ t.speaking }} marta</b></li>
+      <li>✍️ Writing: <b>{{ t.writing }} marta</b></li>
+      <li>AI baholash — <b>toʻliq</b></li>
+    </ul>
+    {% if user.is_authenticated %}
+      <a href="#" class="btn btn-primary btn-block">Tanlash</a>
+    {% else %}
+      <a href="{% url 'signup' %}" class="btn btn-primary btn-block">Roʻyxatdan oʻtish</a>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+<p style="text-align:center;color:var(--muted);padding-bottom:40px">
+  Har bir yangi oʻquvchi Speaking va Writing boʻyicha <b>2 martadan bepul sinov</b> oladi.
+</p>
+{% endblock %}

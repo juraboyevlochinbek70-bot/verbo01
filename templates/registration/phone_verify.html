@@ -1,0 +1,17 @@
+{% extends "base_plain.html" %}
+{% load static %}
+{% block title %}Kodni tasdiqlash — Verbo{% endblock %}
+{% block content %}
+<div class="auth"><div class="auth-card">
+  <div class="auth-mark"><img src="{% static 'img/logo.png' %}" alt="Verbo" class="brand-logo brand-logo-sm"></div>
+  <div class="auth-title">Kodni kiriting</div>
+  <p class="auth-sub">{{ phone }} raqamiga yuborilgan 6 xonali kod</p>
+  {% if debug_code %}<div class="otp-note">Test rejimi (SMS hali ulanmagan): kodingiz <b>{{ debug_code }}</b></div>{% endif %}
+  {% if error %}<ul class="auth-err"><li>{{ error }}</li></ul>{% endif %}
+  <form method="post">{% csrf_token %}
+    <div class="afield"><input class="otp-input" type="text" name="code" inputmode="numeric" maxlength="6" placeholder="––––––" autofocus required></div>
+    <button type="submit" class="auth-btn">Tasdiqlash</button>
+  </form>
+  <p class="auth-foot"><a href="{% url 'register_choice' %}">Raqamni o'zgartirish</a></p>
+</div></div>
+{% endblock %}
