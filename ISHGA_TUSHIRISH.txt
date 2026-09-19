@@ -1,0 +1,29 @@
+VERBO — ishga tushirish (Windows PowerShell)
+
+1) Papkaga o'ting:
+   cd "$HOME\Desktop\verbo"
+
+2) Kutubxonalarni o'rnating (birinchi marta):
+   python -m pip install -r requirements.txt
+
+3) Bazani tayyorlang:
+   python manage.py migrate
+
+4) O'qituvchi (admin) akkaunt yarating (birinchi marta):
+   python manage.py createsuperuser
+
+5) AI kalitini qo'ying (o'sha oynada):
+   $env:ANTHROPIC_API_KEY="sk-ant-SIZNING-KALIT"
+
+6) Serverni ishga tushiring:
+   python manage.py runserver
+
+7) Brauzerda oching: http://127.0.0.1:8000/
+   - Dizaynni ko'rish uchun: "Demo bilan kirish" / Explore Verbo
+   - O'qituvchi paneli: superuser bilan kiring -> /panel/
+
+ESLATMA:
+- Writing (AI baholash) ishlashi uchun ANTHROPIC_API_KEY kerak.
+- Kalitsiz sinash: $env:GROQ_API_KEY="gsk_..." (bepul).
+- Logo: static/img/logo.png (o'zgartirilmagan).
+- Deploy (Render): render.yaml + build.sh tayyor, Root Directory = verbo.

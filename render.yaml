@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: verbo
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn config.wsgi:application"
+    envVars:
+      - key: DJANGO_DEBUG
+        value: "0"
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: PYTHON_VERSION
+        value: "3.12.6"
+      - key: ANTHROPIC_API_KEY
+        sync: false
