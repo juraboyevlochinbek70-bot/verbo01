@@ -12,6 +12,7 @@
     <a href="{% url 'demo_login' %}" class="auth-btn" style="display:block;text-align:center;text-decoration:none;margin-bottom:18px">Demo bilan kirish</a>
     {% endif %}
 
+    {% if phone_enabled %}
     <div class="seg">
       <button type="button" class="seg-btn" id="seg-phone" onclick="setTab('phone')">Telefon</button>
       <button type="button" class="seg-btn" id="seg-email" onclick="setTab('email')">Email</button>
@@ -31,6 +32,7 @@
         <button type="submit" class="auth-btn">Kod olish</button>
       </form>
     </div>
+    {% endif %}
 
     <!-- Email -->
     <div class="apanel {% if not registration_open %}form-dim{% endif %}" id="panel-email">
@@ -54,12 +56,14 @@
 
 <script>
   function setTab(t){
-    document.getElementById('panel-phone').classList.toggle('on', t==='phone');
-    document.getElementById('panel-email').classList.toggle('on', t==='email');
-    document.getElementById('seg-phone').classList.toggle('active', t==='phone');
-    document.getElementById('seg-email').classList.toggle('active', t==='email');
+    var pp=document.getElementById('panel-phone'), pe=document.getElementById('panel-email');
+    var sp=document.getElementById('seg-phone'), se=document.getElementById('seg-email');
+    if(pp) pp.classList.toggle('on', t==='phone');
+    if(pe) pe.classList.toggle('on', t==='email');
+    if(sp) sp.classList.toggle('active', t==='phone');
+    if(se) se.classList.toggle('active', t==='email');
   }
-  setTab("{{ active|default:'phone' }}");
+  setTab("{{ active|default:'email' }}");
 </script>
 <style>
   /* email formadagi Django inputlariga auth uslubini beramiz */
