@@ -6,16 +6,20 @@ from django.shortcuts import redirect, render
 
 from .forms import SignupForm
 from .models import User
-from .sms import generate_code, send_sms, SMS_DEBUG
+from .sms import generate_code, send_sms, SMS_DEBUG, ESKIZ_ENABLED
 from .tiers import public_tiers
 
 EMAIL_BACKEND = "django.contrib.auth.backends.ModelBackend"
 PHONE_BACKEND = "accounts.auth_backends.PhoneBackend"
 
-# Vaqtincha: SMS va Email ro'yxatdan o'tish o'chirilgan (dizaynni ko'rish bosqichi).
-# Real ishga tushganda True qilinadi (yoki DJANGO_REGISTRATION_OPEN=1 muhit o'zgaruvchisi).
+# Ro'yxatdan o'tish: DJANGO_REGISTRATION_OPEN=1 bo'lsa yoqiladi.
 import os
 REGISTRATION_OPEN = os.environ.get("DJANGO_REGISTRATION_OPEN", "0") == "1"
+
+# Telefon/SMS orqali ro'yxat — faqat Eskiz ulangan bo'lsa yoqiladi (aks holda kod
+# ekranda ko'rinib qolmasligi uchun yashiriladi). DJANGO_PHONE_REGISTRATION bilan majburan boshqarish mumkin.
+PHONE_REGISTRATION = os.environ.get(
+    "DJANGO_PHONE_REGISTRATION", "1" if ESKIZ_ENABLED else "0") == "1"
 
 
 def home(request):
@@ -35,9 +39,13 @@ def register_choice(request):
     """Bitta sahifa: Telefon/Email almashtirgichli ro'yxat."""
     if request.user.is_authenticated:
         return redirect("home")
-    active = "email" if request.GET.get("m") == "email" else "phone"
+    if PHONE_REGISTRATION:
+        active = "email" if request.GET.get("m") == "email" else "phone"
+    else:
+        active = "email"
     return render(request, "register.html", {
         "form": SignupForm(), "active": active, "registration_open": REGISTRATION_OPEN,
+        "phone_enabled": PHONE_REGISTRATION,
     })
 
 
@@ -115,7 +123,7 @@ def phone_register(request):
     """Telefon orqali ro'yxat — 1-qadam: raqam va parol."""
     if request.user.is_authenticated:
         return redirect("home")
-    if not REGISTRATION_OPEN:
+    if not (REGISTRATION_OPEN and PHONE_REGISTRATION):
         return redirect("register_choice")
     if request.method != "POST":
         return redirect("register_choice")
@@ -147,6 +155,8 @@ def phone_verify(request):
     """Telefon orqali ro'yxat — 2-qadam: SMS kodini tasdiqlash."""
     if request.user.is_authenticated:
         return redirect("home")
+    if not (REGISTRATION_OPEN and PHONE_REGISTRATION):
+        return redirect("register_choice")
     pending = request.session.get("pending_phone")
     if not pending:
         return redirect("phone_register")
